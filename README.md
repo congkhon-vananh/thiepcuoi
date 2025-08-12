@@ -74,7 +74,7 @@ git push origin main
 
 3. **Truy cập website tại:**
 ```
-https://congkhon.github.io/thiepcuoi
+https://congkhon-vananh.github.io/thiepcuoi
 ```
 
 ### Phương Pháp 2: Manual Deploy
