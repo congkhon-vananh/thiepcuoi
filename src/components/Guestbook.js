@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Container,
@@ -33,7 +33,7 @@ const Guestbook = () => {
   // Google Apps Script Web App URL - cần được tạo và deploy
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGFs59wik6aEZH1ijUgzX043reDi8c6cOfJvCRBwhlimPm5iypiaWxu4ohjxUdNICO5A/exec';
 
-  const loadGuestMessages = async () => {
+  const loadGuestMessages = useCallback(async () => {
     try {
       setLoading(true);
       console.log('Initializing guestbook...');
@@ -64,7 +64,7 @@ const Guestbook = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // Load messages from Google Sheets on component mount
   useEffect(() => {

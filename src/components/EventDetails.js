@@ -8,7 +8,6 @@ import {
   CardContent,
   Button,
   Chip,
-  useTheme,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
