@@ -7,17 +7,12 @@ import {
   CardContent,
   Avatar,
   Grid,
-  useTheme,
-  useMediaQuery,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FavoriteOutlined } from '@mui/icons-material';
 import { FormatQuote } from '@mui/icons-material';
 
 const ThankYouMessage = () => {
-  const theme = useTheme();
-
-
   return (
     <Box
       id="thanks"
@@ -34,12 +29,12 @@ const ThankYouMessage = () => {
           viewport={{ once: true }}
         >
           <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <FavoriteOutlined 
-              sx={{ 
-                fontSize: '3rem', 
-                color: 'primary.main', 
-                mb: 2 
-              }} 
+            <FavoriteOutlined
+              sx={{
+                fontSize: '3rem',
+                color: 'primary.main',
+                mb: 2
+              }}
             />
             <Typography
               variant="h2"
@@ -96,10 +91,10 @@ const ThankYouMessage = () => {
                     background: 'rgba(255, 255, 255, 0.1)',
                   }}
                 />
-                
+
                 <CardContent sx={{ p: 6, position: 'relative', zIndex: 1 }}>
                   <FormatQuote sx={{ fontSize: '3rem', opacity: 0.3, mb: 2 }} />
-                  
+
                   <Typography
                     variant="h5"
                     sx={{
@@ -109,10 +104,10 @@ const ThankYouMessage = () => {
                       textAlign: 'center',
                     }}
                   >
-                    Chúng tôi cảm thấy vô cùng hạnh phúc và biết ơn khi có được sự yêu thương, 
+                    Chúng tôi cảm thấy vô cùng hạnh phúc và biết ơn khi có được sự yêu thương,
                     ủng hộ và chúc phúc từ gia đình và bạn bè trong hành trình tình yêu của mình.
                   </Typography>
-                  
+
                   <Typography
                     variant="body1"
                     sx={{
@@ -122,12 +117,12 @@ const ThankYouMessage = () => {
                       opacity: 0.95,
                     }}
                   >
-                    Tình yêu của chúng tôi đã được nuôi dưỡng và lớn mạnh nhờ vào những lời khuyên, 
-                    sự động viên và tình cảm chân thành từ những người thân yêu nhất. 
-                    Mỗi lời chúc, mỗi nụ cười, mỗi cái ôm đều là những món quà vô giá 
+                    Tình yêu của chúng tôi đã được nuôi dưỡng và lớn mạnh nhờ vào những lời khuyên,
+                    sự động viên và tình cảm chân thành từ những người thân yêu nhất.
+                    Mỗi lời chúc, mỗi nụ cười, mỗi cái ôm đều là những món quà vô giá
                     mà chúng tôi sẽ trân trọng mãi mãi.
                   </Typography>
-                  
+
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4, mb: 4 }}>
                     <Box sx={{ textAlign: 'center' }}>
                       <Avatar
@@ -146,7 +141,7 @@ const ThankYouMessage = () => {
                         Công Khôn
                       </Typography>
                     </Box>
-                    
+
                     <Box sx={{ textAlign: 'center' }}>
                       <Avatar
                         sx={{
@@ -165,7 +160,7 @@ const ThankYouMessage = () => {
                       </Typography>
                     </Box>
                   </Box>
-                  
+
                   <Typography
                     variant="h6"
                     sx={{

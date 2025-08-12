@@ -7,16 +7,11 @@ import {
   Grid,
   Card,
   CardContent,
-  useTheme,
-  useMediaQuery,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Favorite, CalendarToday, LocationOn } from '@mui/icons-material';
 
 const HeroSection = () => {
-  const theme = useTheme();
-
-
   const scrollToSection = (href) => {
     const element = document.querySelector(href);
     if (element) {
@@ -83,7 +78,7 @@ const HeroSection = () => {
               >
                 Chúng tôi sắp kết hôn!
               </Typography>
-              
+
               <Box sx={{ textAlign: 'center', mb: 4 }}>
                 <Typography
                   variant="h1"

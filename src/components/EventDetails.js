@@ -9,7 +9,6 @@ import {
   Button,
   Chip,
   useTheme,
-  useMediaQuery,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
@@ -22,7 +21,6 @@ import {
 } from '@mui/icons-material';
 
 const EventDetails = () => {
-  const theme = useTheme();
 
   const events = [
     {

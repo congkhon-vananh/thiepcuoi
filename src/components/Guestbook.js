@@ -10,9 +10,6 @@ import {
   Grid,
   Avatar,
   Chip,
-
-  useTheme,
-  useMediaQuery,
   Alert,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -32,26 +29,19 @@ const Guestbook = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [guestMessages, setGuestMessages] = useState([]);
-  const theme = useTheme();
-
 
   // Google Apps Script Web App URL - cần được tạo và deploy
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGFs59wik6aEZH1ijUgzX043reDi8c6cOfJvCRBwhlimPm5iypiaWxu4ohjxUdNICO5A/exec';
-
-  // Load messages from Google Sheets on component mount
-  useEffect(() => {
-    loadGuestMessages();
-  }, [loadGuestMessages]);
 
   const loadGuestMessages = async () => {
     try {
       setLoading(true);
       console.log('Initializing guestbook...');
-      
+
       // Skip Google Sheets for now due to CORS issues
       // Will try Google Sheets in background but not block UI
       tryLoadFromGoogleSheets();
-      
+
       // Initialize with some sample messages for better UX
       setGuestMessages([
         {
@@ -61,14 +51,14 @@ const Guestbook = () => {
           timestamp: '2025-08-10'
         },
         {
-          id: 'sample-2', 
+          id: 'sample-2',
           name: 'Bạn bè thân thiết',
           content: 'Tình yêu của hai bạn thật đẹp và trong sáng! Chúc mừng hạnh phúc mới và chúc hai bạn trăm năm hạnh phúc bên nhau!',
           timestamp: '2025-08-09'
         }
       ]);
       console.log('Guestbook initialized with sample messages');
-      
+
     } catch (error) {
       console.error('Error initializing guestbook:', error);
     } finally {
@@ -76,13 +66,18 @@ const Guestbook = () => {
     }
   };
 
+  // Load messages from Google Sheets on component mount
+  useEffect(() => {
+    loadGuestMessages();
+  }, [loadGuestMessages]);
+
   // Try to load from Google Sheets in background (non-blocking)
   const tryLoadFromGoogleSheets = async () => {
     try {
       console.log('Attempting to load from Google Sheets...');
       const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=read`);
       const data = await response.json();
-      
+
       if (data.success) {
         const visibleMessages = data.messages.filter(msg => msg.show === true);
         setGuestMessages(prev => {

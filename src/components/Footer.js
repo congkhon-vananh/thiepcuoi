@@ -6,14 +6,13 @@ import {
   Grid,
   IconButton,
   Divider,
-  useTheme,
 } from '@mui/material';
-import { 
-  Favorite, 
-  Facebook, 
-  Instagram, 
+import {
+  Favorite,
+  Facebook,
+  Instagram,
   Email,
-  Phone 
+  Phone
 } from '@mui/icons-material';
 
 const Footer = () => {
@@ -41,11 +40,11 @@ const Footer = () => {
             >
               Công Khôn & Vân Anh
             </Typography>
-            
+
             <Typography variant="body1" sx={{ mb: 3, opacity: 0.8 }}>
               Cảm ơn bạn đã dành thời gian xem thiệp cưới của chúng tôi
             </Typography>
-            
+
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 3 }}>
               <IconButton
                 sx={{
@@ -92,9 +91,9 @@ const Footer = () => {
                 <Phone />
               </IconButton>
             </Box>
-            
+
             <Divider sx={{ my: 3, borderColor: 'grey.700' }} />
-            
+
             <Typography
               variant="body2"
               sx={{
@@ -107,7 +106,7 @@ const Footer = () => {
             >
               Made with <Favorite sx={{ color: 'red', fontSize: '1rem' }} /> for our special day
             </Typography>
-            
+
             <Typography variant="body2" sx={{ opacity: 0.5, mt: 1 }}>
               © 2025 Công Khôn & Vân Anh Wedding
             </Typography>

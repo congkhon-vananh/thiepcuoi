@@ -9,8 +9,6 @@ import {
   Dialog,
   DialogContent,
   IconButton,
-  useTheme,
-  useMediaQuery,
   Skeleton,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -75,7 +73,6 @@ const PhotoGallery = () => {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
   const [visibleImages, setVisibleImages] = useState(6); // Load 6 images initially
-  const theme = useTheme();
 
 
   // Real wedding photos of Công Khôn & Vân Anh

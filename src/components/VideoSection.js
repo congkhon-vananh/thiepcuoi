@@ -5,16 +5,12 @@ import {
   Typography,
   Card,
   CardContent,
-
-  useTheme,
-  useMediaQuery,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { PlayCircleOutline } from '@mui/icons-material';
 
 const VideoSection = () => {
   const [showVideo, setShowVideo] = useState(false);
-  const theme = useTheme();
 
 
   // Dailymotion video URL and embed URL with parameters to prevent autoplay and next video
@@ -41,12 +37,12 @@ const VideoSection = () => {
           viewport={{ once: true }}
         >
           <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <PlayCircleOutline 
-              sx={{ 
-                fontSize: '3rem', 
-                color: 'primary.main', 
-                mb: 2 
-              }} 
+            <PlayCircleOutline
+              sx={{
+                fontSize: '3rem',
+                color: 'primary.main',
+                mb: 2
+              }}
             />
             <Typography
               variant="h2"
@@ -112,16 +108,16 @@ const VideoSection = () => {
                     }}
                     onClick={handlePlayVideo}
                   >
-                    <PlayCircleOutline 
-                      sx={{ 
-                        fontSize: '5rem', 
+                    <PlayCircleOutline
+                      sx={{
+                        fontSize: '5rem',
                         mb: 2,
                         opacity: 0.9,
                         transition: 'all 0.3s ease',
                         '&:hover': {
                           transform: 'scale(1.1)',
                         },
-                      }} 
+                      }}
                     />
                     <Typography variant="h4" sx={{ mb: 1, fontWeight: 700, textAlign: 'center' }}>
                       Video Cưới

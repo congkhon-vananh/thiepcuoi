@@ -11,9 +11,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-
-  useTheme,
-  useMediaQuery,
   Alert,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -29,8 +26,6 @@ const GiftBox = () => {
   const [open, setOpen] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState('');
   const [copied, setCopied] = useState(false);
-  const theme = useTheme();
-
 
   const giftMethods = [
     {
