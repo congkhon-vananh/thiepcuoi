@@ -76,7 +76,7 @@ const PhotoGallery = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [visibleImages, setVisibleImages] = useState(6); // Load 6 images initially
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   // Real wedding photos of Công Khôn & Vân Anh
   const photos = [

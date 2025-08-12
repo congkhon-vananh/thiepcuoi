@@ -17,7 +17,7 @@ import {
 } from '@mui/icons-material';
 
 const Footer = () => {
-  const theme = useTheme();
+
 
   return (
     <Box

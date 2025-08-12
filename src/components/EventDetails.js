@@ -23,7 +23,6 @@ import {
 
 const EventDetails = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const events = [
     {

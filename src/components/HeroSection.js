@@ -15,7 +15,7 @@ import { Favorite, CalendarToday, LocationOn } from '@mui/icons-material';
 
 const HeroSection = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   const scrollToSection = (href) => {
     const element = document.querySelector(href);

@@ -16,7 +16,7 @@ import { FormatQuote } from '@mui/icons-material';
 
 const ThankYouMessage = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   return (
     <Box

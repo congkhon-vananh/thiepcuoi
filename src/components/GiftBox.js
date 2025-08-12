@@ -11,8 +11,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
-  Chip,
+
   useTheme,
   useMediaQuery,
   Alert,
@@ -20,8 +19,7 @@ import {
 import { motion } from 'framer-motion';
 import {
   CardGiftcard,
-  AccountBalance,
-  CreditCard,
+
   QrCode,
   ContentCopy,
   CheckCircle
@@ -32,7 +30,7 @@ const GiftBox = () => {
   const [selectedMethod, setSelectedMethod] = useState('');
   const [copied, setCopied] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   const giftMethods = [
     {

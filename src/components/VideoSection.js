@@ -5,21 +5,20 @@ import {
   Typography,
   Card,
   CardContent,
-  Button,
-  CardMedia,
+
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import { PlayCircleOutline, OpenInNew } from '@mui/icons-material';
+import { PlayCircleOutline } from '@mui/icons-material';
 
 const VideoSection = () => {
   const [showVideo, setShowVideo] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   // Dailymotion video URL and embed URL with parameters to prevent autoplay and next video
-  const videoUrl = 'https://dai.ly/x9omxmo';
+
   const embedUrl = 'https://www.dailymotion.com/embed/video/x9omxmo?autoplay=0&mute=0&sharing-enable=0&ui-start-screen-info=0&ui-logo=0&queue-autoplay-next=0&queue-enable=0';
 
   const handlePlayVideo = () => {

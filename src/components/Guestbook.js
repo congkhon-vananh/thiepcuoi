@@ -10,7 +10,7 @@ import {
   Grid,
   Avatar,
   Chip,
-  Divider,
+
   useTheme,
   useMediaQuery,
   Alert,
@@ -20,7 +20,7 @@ import {
   MenuBook,
   Send,
   Favorite,
-  Person,
+
   Message
 } from '@mui/icons-material';
 
@@ -33,7 +33,7 @@ const Guestbook = () => {
   const [loading, setLoading] = useState(false);
   const [guestMessages, setGuestMessages] = useState([]);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
 
   // Google Apps Script Web App URL - cần được tạo và deploy
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGFs59wik6aEZH1ijUgzX043reDi8c6cOfJvCRBwhlimPm5iypiaWxu4ohjxUdNICO5A/exec';
@@ -41,7 +41,7 @@ const Guestbook = () => {
   // Load messages from Google Sheets on component mount
   useEffect(() => {
     loadGuestMessages();
-  }, []);
+  }, [loadGuestMessages]);
 
   const loadGuestMessages = async () => {
     try {
@@ -98,9 +98,9 @@ const Guestbook = () => {
     }
   };
 
-  const loadFallbackMessages = () => {
-    console.log('Loading fallback messages...');
-  };
+  // const loadFallbackMessages = () => {
+  //   console.log('Loading fallback messages...');
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
