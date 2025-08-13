@@ -39,7 +39,7 @@ const GiftBox = () => {
         description: 'Quét mã QR để gửi tiền mừng cưới cho chú rể',
         qrImage: '/images/qr-groom.jpg',
         bankName: 'MB Bank',
-        accountNumber: '0377006865'
+        accountNumber: '0377006965'
       }
     },
     {
