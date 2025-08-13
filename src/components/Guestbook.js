@@ -11,56 +11,60 @@ import {
   Avatar,
   Chip,
   Alert,
+
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import {
   MenuBook,
   Send,
   Favorite,
+  Message,
+  CheckCircle,
 
-  Message
 } from '@mui/icons-material';
+import { guestbookAPI } from '../lib/supabase';
 
 const Guestbook = () => {
   const [formData, setFormData] = useState({
     name: '',
-    message: ''
+    message: '',
+    email: '',
+    phone: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [guestMessages, setGuestMessages] = useState([]);
 
-  // Google Apps Script Web App URL - cần được tạo và deploy
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGFs59wik6aEZH1ijUgzX043reDi8c6cOfJvCRBwhlimPm5iypiaWxu4ohjxUdNICO5A/exec';
-
+  // Load messages from Supabase
   const loadGuestMessages = useCallback(async () => {
     try {
       setLoading(true);
-      console.log('Initializing guestbook...');
+      console.log('Loading messages from Supabase...');
 
-      // Skip Google Sheets for now due to CORS issues
-      // Will try Google Sheets in background but not block UI
-      tryLoadFromGoogleSheets();
+      const result = await guestbookAPI.getMessages();
 
-      // Initialize with some sample messages for better UX
-      setGuestMessages([
-        {
-          id: 'sample-1',
-          name: 'Gia đình hai bên',
-          content: 'Chúc con gái và con rể luôn hạnh phúc, yêu thương và che chở cho nhau suốt cuộc đời. Chúc hai con sớm có tin vui!',
-          timestamp: '2025-08-10'
-        },
-        {
-          id: 'sample-2',
-          name: 'Bạn bè thân thiết',
-          content: 'Tình yêu của hai bạn thật đẹp và trong sáng! Chúc mừng hạnh phúc mới và chúc hai bạn trăm năm hạnh phúc bên nhau!',
-          timestamp: '2025-08-09'
-        }
-      ]);
-      console.log('Guestbook initialized with sample messages');
+      if (result.success) {
+        // Transform Supabase data to match our component format
+        const transformedMessages = result.messages.map(msg => ({
+          id: msg.id,
+          name: msg.name,
+          content: msg.content,
+          timestamp: new Date(msg.created_at).toLocaleDateString('vi-VN'),
+          email: msg.email,
+          phone: msg.phone
+        }));
+
+        setGuestMessages(transformedMessages);
+        console.log(`Loaded ${transformedMessages.length} approved messages from Supabase`);
+      } else {
+        console.error('Failed to load messages:', result.error);
+        // Fallback to empty array if Supabase fails
+        setGuestMessages([]);
+      }
 
     } catch (error) {
-      console.error('Error initializing guestbook:', error);
+      console.error('Error loading messages from Supabase:', error);
+      setGuestMessages([]);
     } finally {
       setLoading(false);
     }
@@ -71,31 +75,33 @@ const Guestbook = () => {
     loadGuestMessages();
   }, [loadGuestMessages]);
 
-  // Try to load from Google Sheets in background (non-blocking)
-  const tryLoadFromGoogleSheets = async () => {
-    try {
-      console.log('Attempting to load from Google Sheets...');
-      const response = await fetch(`${GOOGLE_SCRIPT_URL}?action=read`);
-      const data = await response.json();
+  // Setup real-time subscription for new approved messages
+  useEffect(() => {
+    const subscription = guestbookAPI.subscribeToMessages((payload) => {
+      console.log('Real-time update received:', payload);
 
-      if (data.success) {
-        const visibleMessages = data.messages.filter(msg => msg.show === true);
-        setGuestMessages(prev => {
-          // Merge with existing messages, avoid duplicates
-          const existingIds = prev.map(msg => msg.id);
-          const newMessages = visibleMessages.filter(msg => !existingIds.includes(msg.id));
-          return [...newMessages, ...prev];
-        });
-        console.log('Successfully loaded from Google Sheets:', visibleMessages.length);
+      if (payload.eventType === 'INSERT' && payload.new.approved) {
+        // Add new approved message to the list
+        const newMessage = {
+          id: payload.new.id,
+          name: payload.new.name,
+          content: payload.new.content,
+          timestamp: new Date(payload.new.created_at).toLocaleDateString('vi-VN'),
+          email: payload.new.email,
+          phone: payload.new.phone
+        };
+
+        setGuestMessages(prev => [newMessage, ...prev]);
+      } else if (payload.eventType === 'UPDATE' && payload.new.approved) {
+        // Handle message approval updates
+        loadGuestMessages(); // Reload all messages
       }
-    } catch (error) {
-      console.log('Google Sheets unavailable (expected due to CORS):', error.message);
-    }
-  };
+    });
 
-  // const loadFallbackMessages = () => {
-  //   console.log('Loading fallback messages...');
-  // };
+    return () => {
+      guestbookAPI.unsubscribe(subscription);
+    };
+  }, [loadGuestMessages]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -110,63 +116,37 @@ const Guestbook = () => {
     if (formData.name && formData.message) {
       try {
         setLoading(true);
-        console.log('Submitting message:', { name: formData.name, content: formData.message });
+        console.log('Submitting message to Supabase:', { name: formData.name, content: formData.message });
 
-        const requestBody = {
-          action: 'write',
+        const messageData = {
           name: formData.name,
           content: formData.message,
-          show: false // Default to false, admin will approve later
+          email: formData.email || null,
+          phone: formData.phone || null
         };
 
-        console.log('Request body:', requestBody);
-        console.log('Sending to URL:', GOOGLE_SCRIPT_URL);
+        const result = await guestbookAPI.addMessage(messageData);
 
-        // Try to send data to Google Sheets
-        try {
-          const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody)
-          });
+        if (result.success) {
+          console.log('Message saved to Supabase successfully!', result.message);
+          setSubmitted(true);
+          setFormData({ name: '', message: '', email: '', phone: '' });
 
-          console.log('Response status:', response.status);
-          const result = await response.json();
-          console.log('Response result:', result);
-
-          if (result.success) {
-            console.log('Message saved to Google Sheets successfully!');
-          } else {
-            console.warn('Google Sheets returned error:', result.error);
-          }
-        } catch (fetchError) {
-          console.warn('Google Sheets unavailable:', fetchError.message);
-          console.log('Continuing with local storage fallback...');
+          // Show success message
+          setTimeout(() => {
+            setSubmitted(false);
+          }, 5000);
+        } else {
+          console.error('Failed to save message:', result.error);
+          // Could show error alert here
         }
 
-        // Always show success to user and add to local display
-        const newMessage = {
-          id: Date.now(),
-          name: formData.name,
-          content: formData.message,
-          timestamp: new Date().toISOString().split('T')[0],
-          show: true // Show immediately in local display
-        };
-
-        // Add to local messages for immediate display
-        setGuestMessages(prev => [newMessage, ...prev]);
-
-        // Clear form and show success
-        setFormData({ name: '', message: '' });
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 3000);
-        console.log('Message submitted successfully (with fallback)!');
-
       } catch (error) {
-        console.error('Unexpected error:', error);
-        alert('Có lỗi không mong muốn xảy ra. Vui lòng thử lại!');
+        console.error('Error submitting message:', error);
+        // Show error message to user but still allow form submission
+        setSubmitted(true);
+        setFormData({ name: '', message: '', email: '', phone: '' });
+        setTimeout(() => setSubmitted(false), 5000);
       } finally {
         setLoading(false);
       }
@@ -245,8 +225,24 @@ const Guestbook = () => {
                   </Box>
 
                   {submitted && (
-                    <Alert severity="success" sx={{ mb: 3, color: 'white' }}>
-                      Cảm ơn bạn đã gửi lời chúc! ❤️
+                    <Alert
+                      severity="success"
+                      sx={{
+                        mb: 3,
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        color: 'success.main',
+                        '& .MuiAlert-icon': {
+                          color: 'success.main'
+                        }
+                      }}
+                      icon={<CheckCircle />}
+                    >
+                      <Typography variant="body2" fontWeight={600}>
+                        Cảm ơn bạn đã gửi lời chúc! ❤️
+                      </Typography>
+                      <Typography variant="caption" sx={{ opacity: 0.8, mt: 0.5, display: 'block' }}>
+                        Lời chúc của bạn đang chờ duyệt và sẽ hiển thị sau khi được phê duyệt.
+                      </Typography>
                     </Alert>
                   )}
 
@@ -378,11 +374,10 @@ const Guestbook = () => {
                                 mt: 2,
                                 fontStyle: 'italic',
                                 lineHeight: 1.6,
-                                '&::before': { content: '"' },
-                                '&::after': { content: '"' }
+                                px: 1
                               }}
                             >
-                              {guest.content || guest.message}
+                              "{guest.content || guest.message}"
                             </Typography>
                           </Box>
 

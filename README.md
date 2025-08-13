@@ -2,18 +2,14 @@
 
 Trang web thiệp cưới online đẹp mắt được thiết kế theo phong cách Material Design và lấy cảm hứng từ Airbnb, dành cho đám cưới của Công Khôn và Vân Anh.
 
-## 🌟 Tính Năng
+## 🚀 Tính Năng
 
-- ✨ **Trang chủ đẹp mắt** với tên cô dâu chú rể
-- 🎥 **Video cưới** nhúng từ Google Drive
-- 📸 **Album ảnh cưới** với gallery tương tác
-- 📅 **Lịch cưới** với thông tin 2 buổi tiệc:
-  - Nhà cô dâu: 16/8/2025
-  - Nhà chú rể: 17/8/2025
-- 🗺️ **Bản đồ Google Maps** cho từng địa điểm
-- 💌 **Lời cảm ơn** từ cô dâu chú rể
-- 🎁 **Hộp mừng cưới** với thông tin chuyển khoản
-- 📝 **Sổ lời chúc** cho khách mời gửi lời chúc phúc
+- 🎥 **Video Cưới**: Embed video từ Dailymotion với giao diện đẹp
+- 📸 **Album Ảnh**: Gallery ảnh cưới với lightbox và navigation
+- 📅 **Chi Tiết Sự Kiện**: Thông tin lịch cưới với Google Maps
+- 💝 **Hộp Quà Cưới**: QR code và thông tin chuyển khoản
+- 📖 **Sổ Lời Chúc**: Guestbook tích hợp Supabase với real-time updates
+- 💌 **Lời Cảm Ơn**: Thông điệp cảm ơn chân thành
 - 📱 **Responsive design** tương thích mọi thiết bị
 - 🎨 **Material Design** với animations mượt mà
 
@@ -22,31 +18,47 @@ Trang web thiệp cưới online đẹp mắt được thiết kế theo phong c
 ### Yêu Cầu Hệ Thống
 - Node.js (phiên bản 16 trở lên)
 - npm hoặc yarn
+- Tài khoản Supabase (cho Guestbook)
 
-### Cài Đặt và Chạy Local
-
-1. **Clone repository:**
-```bash
-git clone https://github.com/congkhon/thiepcuoi.git
-cd thiepcuoi
-```
-
-2. **Cài đặt dependencies:**
+### Cài Đặt Dependencies
 ```bash
 npm install
 ```
 
-3. **Khởi chạy development server:**
+### Cấu Hình Supabase (Bắt Buộc)
+
+1. **Tạo project Supabase:**
+   - Đăng nhập vào [Supabase](https://supabase.com)
+   - Tạo project mới
+
+2. **Setup Database:**
+   - Làm theo hướng dẫn trong `SUPABASE_SETUP.md`
+   - Chạy SQL commands để tạo table và policies
+
+3. **Cấu hình Environment Variables:**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Cập nhật `.env.local` với thông tin Supabase của bạn:
+   ```env
+   REACT_APP_SUPABASE_URL=https://your-project-id.supabase.co
+   REACT_APP_SUPABASE_ANON_KEY=your-anon-key-here
+   ```
+
+### Chạy Development Server
 ```bash
 npm start
 ```
 
-4. **Dừng development server:**
+Website sẽ chạy tại http://localhost:3000
+
+### Dừng Development Server
 ```bash
 npm stop
 ```
 
-5. **Mở trình duyệt và truy cập:**
+### Mở trình duyệt và truy cập:
 ```
 http://localhost:3000
 ```

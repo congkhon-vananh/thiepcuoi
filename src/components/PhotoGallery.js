@@ -75,89 +75,49 @@ const PhotoGallery = () => {
   const [visibleImages, setVisibleImages] = useState(6); // Load 6 images initially
 
 
-  // Real wedding photos of Công Khôn & Vân Anh
-  const photos = [
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN07747.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 1',
-      title: 'Khoảnh khắc hạnh phúc'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN07763.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 2',
-      title: 'Tình yêu đích thực'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN07770.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 3',
-      title: 'Ngày đặc biệt'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN07965.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 4',
-      title: 'Yêu thương vĩnh cửu'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN07994.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 5',
-      title: 'Hạnh phúc bên nhau'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08196.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 6',
-      title: 'Kỷ niệm đẹp'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08291.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 7',
-      title: 'Tình yêu bất tận'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08381.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 8',
-      title: 'Lễ cưới đẹp'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08390.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 9',
-      title: 'Nụ cười hạnh phúc'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08419.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 10',
-      title: 'Cặp đôi hoàn hảo'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08438.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 11',
-      title: 'Khoảnh khắc thiêng liêng'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/TUN08498.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 12',
-      title: 'Tình yêu vĩnh cửu'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/15x21 (1).jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 13',
-      title: 'Studio cưới đẹp'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/15x21 (2).jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 14',
-      title: 'Phong cách cổ điển'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/15x21 (3).jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 15',
-      title: 'Áo dài truyền thống'
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/60x90.jpg`,
-      alt: 'Ảnh cưới Công Khôn & Vân Anh 16',
-      title: 'Poster cưới đẹp'
-    }
+  // All wedding photos from public/images (excluding avatars)
+  const imageFilenames = [
+    'totinh.jpg', 'hoian.jpg', 'quochochue.jpg', 'oneyear.jpg',
+    'damcuoianhtrai.jpg', 'quynhon.JPG','cauhon.jpg',
+    '0 (2).jpg', '0 (4).jpg', '0 (5).jpg', '0 (6).jpg', '0 (7).jpg', '0 (8).jpg', '0 (9).jpg',
+    '15x21 (1).jpg', '15x21 (2).jpg', '15x21 (3).jpg', '15x21 (4).jpg', '15x21 (5).jpg',
+    '60x90.1.jpg', '60x90.jpg',
+    'TUN07747.jpg', 'TUN07763.jpg', 'TUN07770.jpg', 'TUN07965.jpg', 'TUN07994.jpg',
+    'TUN08196.jpg', 'TUN08291.jpg', 'TUN08381.jpg', 'TUN08390.jpg', 'TUN08419.jpg',
+    'TUN08438.jpg', 'TUN08498.jpg', 'TUN08514.jpg', 'TUN08570.jpg'
+    // Excluding: qr-bride.jpg, qr-groom.jpg (used in GiftBox), and avatar images
   ];
+
+  // Generate photos array dynamically
+  const photos = imageFilenames.map((filename, index) => {
+    // Create meaningful titles based on filename patterns
+    let title = 'Khoảnh khắc hạnh phúc';
+    if (filename.startsWith('TUN')) {
+      title = 'Ảnh cưới chuyên nghiệp';
+    } else if (filename.startsWith('15x21')) {
+      title = 'Ảnh studio đẹp';
+    } else if (filename.includes('cauhon')) {
+      title = 'She said yes!';
+    } else if (filename.includes('damcuoi')) {
+      title = 'Đám cưới anh trai';
+    } else if (filename.includes('hoian')) {
+      title = 'Kỉ niệm Hội An';
+    } else if (filename.includes('oneyear')) {
+      title = 'Kỉ niệm một năm bên nhau';
+    } else if (filename.includes('hue')) {
+      title = 'Trường chàng';
+    } else if (filename.includes('totinh')) {
+      title = 'Lời tỏ tình công khai';
+    } else if (filename.includes('quynhon')) {
+      title = 'Du hí Quy Nhơn';
+    }
+
+    return {
+      src: `${process.env.PUBLIC_URL}/images/${filename}`,
+      alt: `Ảnh cưới Công Khôn & Vân Anh ${index + 1}`,
+      title: title
+    };
+  });
 
   const handleImageClick = (index) => {
     setSelectedImage(index);

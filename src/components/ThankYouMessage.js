@@ -126,17 +126,17 @@ const ThankYouMessage = () => {
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4, mb: 4 }}>
                     <Box sx={{ textAlign: 'center' }}>
                       <Avatar
+                        src={`${process.env.PUBLIC_URL}/images/avata-ck.jpeg`}
                         sx={{
-                          width: 80,
-                          height: 80,
-                          bgcolor: 'rgba(255, 255, 255, 0.2)',
-                          fontSize: '2rem',
+                          width: 160,
+                          height: 160,
                           mx: 'auto',
                           mb: 1,
+                          border: '3px solid rgba(255, 255, 255, 0.8)',
+                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                         }}
-                      >
-                        CK
-                      </Avatar>
+                        alt="Chú rể Công Khôn"
+                      />
                       <Typography variant="h6" sx={{ fontFamily: 'Dancing Script' }}>
                         Công Khôn
                       </Typography>
@@ -144,17 +144,17 @@ const ThankYouMessage = () => {
 
                     <Box sx={{ textAlign: 'center' }}>
                       <Avatar
+                        src={`${process.env.PUBLIC_URL}/images/avata-va.jpeg`}
                         sx={{
-                          width: 80,
-                          height: 80,
-                          bgcolor: 'rgba(255, 255, 255, 0.2)',
-                          fontSize: '2rem',
+                          width: 160,
+                          height: 160,
                           mx: 'auto',
                           mb: 1,
+                          border: '3px solid rgba(255, 255, 255, 0.8)',
+                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                         }}
-                      >
-                        VA
-                      </Avatar>
+                        alt="Cô dâu Vân Anh"
+                      />
                       <Typography variant="h6" sx={{ fontFamily: 'Dancing Script' }}>
                         Vân Anh
                       </Typography>
