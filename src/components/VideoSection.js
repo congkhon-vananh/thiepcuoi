@@ -108,24 +108,38 @@ const VideoSection = () => {
                     }}
                     onClick={handlePlayVideo}
                   >
-                    <PlayCircleOutline
+                    <Typography
+                      variant="h4"
                       sx={{
-                        fontSize: '5rem',
-                        mb: 2,
-                        opacity: 0.9,
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'scale(1.1)',
-                        },
+                        mb: 1,
+                        fontWeight: 700,
+                        textAlign: 'center',
+                        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' }
                       }}
-                    />
-                    <Typography variant="h4" sx={{ mb: 1, fontWeight: 700, textAlign: 'center' }}>
+                    >
                       Video Cưới
                     </Typography>
-                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 500, textAlign: 'center' }}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        mb: 2,
+                        fontWeight: 500,
+                        textAlign: 'center',
+                        fontSize: { xs: '1.2rem', sm: '1.4rem', md: '1.5rem' }
+                      }}
+                    >
                       Công Khôn & Vân Anh
                     </Typography>
-                    <Typography variant="body1" sx={{ opacity: 0.9, textAlign: 'center', px: 2 }}>
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        opacity: 0.9,
+                        textAlign: 'center',
+                        px: 2,
+                        fontSize: { xs: '0.9rem', sm: '1rem' },
+                        lineHeight: 1.4
+                      }}
+                    >
                       Những khoảnh khắc đẹp nhất của chúng tôi
                     </Typography>
                     <Box
