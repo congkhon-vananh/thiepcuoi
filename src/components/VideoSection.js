@@ -13,9 +13,8 @@ const VideoSection = () => {
   const [showVideo, setShowVideo] = useState(false);
 
 
-  // Dailymotion video URL and embed URL with parameters to prevent autoplay and next video
-
-  const embedUrl = 'https://www.dailymotion.com/embed/video/x9omxmo?autoplay=0&mute=0&sharing-enable=0&ui-start-screen-info=0&ui-logo=0&queue-autoplay-next=0&queue-enable=0';
+  // Vimeo video URL and embed URL with autoplay enabled
+  const embedUrl = 'https://player.vimeo.com/video/1109709235?h=240145750d&autoplay=1&muted=0&title=1&byline=1&portrait=1';
 
   const handlePlayVideo = () => {
     setShowVideo(true);
@@ -175,9 +174,11 @@ const VideoSection = () => {
                       height: '100%',
                       border: 'none',
                     }}
-                    allow="fullscreen; picture-in-picture"
+                    frameBorder="0"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                     allowFullScreen
-                    title="Video Cưới Công Khôn & Vân Anh"
+                    title="Video Cưới Công Khôn & Vân Anh - Vimeo"
                   />
                 )}
               </Box>

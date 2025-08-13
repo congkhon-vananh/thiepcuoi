@@ -48,19 +48,22 @@ const LazyImage = ({ src, alt, height = 300, onClick }) => {
       <CardMedia
         ref={imgRef}
         component="img"
-        height={height}
         image={src}
         alt={alt}
         onLoad={handleLoad}
         onError={handleError}
         onClick={onClick}
         sx={{
-          objectFit: 'cover',
+          width: '100%',
+          height: 'auto',
+          maxHeight: '400px',
+          objectFit: 'contain',
+          backgroundColor: '#f5f5f5',
           transition: 'transform 0.3s ease, opacity 0.3s ease',
           opacity: loaded ? 1 : 0,
           cursor: 'pointer',
           '&:hover': {
-            transform: 'scale(1.1)',
+            transform: 'scale(1.02)',
           },
         }}
         loading="lazy" // Native lazy loading
@@ -207,7 +210,6 @@ const PhotoGallery = () => {
                     <LazyImage
                       src={photo.src}
                       alt={photo.alt}
-                      height={300}
                       onClick={() => handleImageClick(index)}
                     />
                   </Card>
