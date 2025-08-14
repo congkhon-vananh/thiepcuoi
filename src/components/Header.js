@@ -45,7 +45,7 @@ const Header = () => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2, fontFamily: 'Dancing Script', fontSize: '1.5rem' }}>
-        Công Khôn & Vân Anh
+        Công Khôn 💕 Vân Anh
       </Typography>
       <List>
         {menuItems.map((item) => (
@@ -65,9 +65,9 @@ const Header = () => {
 
   return (
     <>
-      <AppBar 
-        position="fixed" 
-        sx={{ 
+      <AppBar
+        position="fixed"
+        sx={{
           backgroundColor: 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(10px)',
           color: 'text.primary',
@@ -86,9 +86,9 @@ const Header = () => {
               color: 'primary.main',
             }}
           >
-            Công Khôn & Vân Anh
+            Công Khôn 💕 Vân Anh
           </Typography>
-          
+
           {isMobile ? (
             <IconButton
               color="inherit"
@@ -104,7 +104,7 @@ const Header = () => {
                 <Button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  sx={{ 
+                  sx={{
                     color: 'text.primary',
                     '&:hover': {
                       backgroundColor: 'primary.light',
@@ -119,7 +119,7 @@ const Header = () => {
           )}
         </Toolbar>
       </AppBar>
-      
+
       <Drawer
         variant="temporary"
         open={mobileOpen}

@@ -127,7 +127,7 @@ const VideoSection = () => {
                         fontSize: { xs: '1.2rem', sm: '1.4rem', md: '1.5rem' }
                       }}
                     >
-                      Công Khôn & Vân Anh
+                      Công Khôn 💕 Vân Anh
                     </Typography>
                     <Typography
                       variant="body1"
@@ -178,7 +178,7 @@ const VideoSection = () => {
                     referrerPolicy="strict-origin-when-cross-origin"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                     allowFullScreen
-                    title="Video Cưới Công Khôn & Vân Anh - Vimeo"
+                    title="Video Cưới Công Khôn 💕 Vân Anh - Vimeo"
                   />
                 )}
               </Box>

@@ -38,7 +38,7 @@ const Footer = () => {
                 color: 'primary.light',
               }}
             >
-              Công Khôn & Vân Anh
+              Công Khôn 💕 Vân Anh
             </Typography>
 
             <Typography variant="body1" sx={{ mb: 3, opacity: 0.8 }}>

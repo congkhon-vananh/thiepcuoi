@@ -117,7 +117,7 @@ const PhotoGallery = () => {
 
     return {
       src: `${process.env.PUBLIC_URL}/images/${filename}`,
-      alt: `Ảnh cưới Công Khôn & Vân Anh ${index + 1}`,
+      alt: `Ảnh cưới Công Khôn 💕 Vân Anh ${index + 1}`,
       title: title
     };
   });
